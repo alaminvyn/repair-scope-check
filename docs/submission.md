@@ -32,7 +32,7 @@ The excluded-pipework sample should return **Approval required**. The displayed 
 
 ## 7. Project links
 
-- Website: public GitHub Pages URL after verification.
-- GitHub: public source repository URL after publication.
+- Website: https://alaminvyn.github.io/repair-scope-check/
+- GitHub: https://github.com/alaminvyn/repair-scope-check
 
 In **Evidence & Supporting Information**, attach the same public GitHub repository URL as required. Complete Portal verification before submitting.

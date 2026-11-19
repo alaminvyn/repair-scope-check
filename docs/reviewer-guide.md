@@ -2,7 +2,9 @@
 
 ## Confirm the release
 
-Open the live website URL from the submission. Confirm that the **View Intelligent Contract** link opens the Bradbury Phase 2 address given in `deployment.json`. Open the [finalized deployment receipt](https://scan.bradbury.genlayer.com/tx/0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb) to verify the deployment. Verification transactions are listed in `deployment.json` once their results are confirmed.
+Open the [GitHub Pages release](https://alaminvyn.github.io/repair-scope-check/). Confirm that the **View Intelligent Contract** link opens the Bradbury Phase 2 address given in `deployment.json`. Open the [finalized deployment receipt](https://scan.bradbury.genlayer.com/tx/0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb) to verify the deployment. Verification transactions are listed in `deployment.json` once their results are confirmed.
+
+The deployment and assessment receipts are publicly viewable. A test wallet is needed to submit a fresh assessment.
 
 ## Reproduce the result
 

@@ -16,6 +16,7 @@ The corrected contract is deployed and finalized on Bradbury Phase 2. The explic
 
 `deployment.json` is the source of truth for the contract address, deployment transaction, and verification transactions. An empty address means the frontend is in development and cannot submit a live case. Sample text is always editable. Its expected outcomes are test expectations. The app displays a verdict only when it reads a stored result from the contract.
 
+- Public release links: [Repository](https://github.com/alaminvyn/repair-scope-check) · [GitHub Pages](https://alaminvyn.github.io/repair-scope-check/)
 - Network: GenLayer Bradbury Phase 2, chain ID `4221`
 - Deployed contract: [`0x7D24a5590b828901eFD95af1e4E6a7D483E899eA`](https://scan.bradbury.genlayer.com/address/0x7D24a5590b828901eFD95af1e4E6a7D483E899eA)
 - Finalized deployment: [`0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb`](https://scan.bradbury.genlayer.com/tx/0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb)
