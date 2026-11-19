@@ -309,3 +309,51 @@ footer {
   overflow-wrap: anywhere;
   color: #93322a;
 }
+
+.verified {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 1.25rem 2rem;
+  margin-bottom: 1.25rem;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #f9fcfa;
+}
+.verified h2 {
+  margin: 0;
+  font-size: clamp(1.65rem, 4vw, 2.3rem);
+  letter-spacing: -.045em;
+}
+.verified p {
+  margin: .55rem 0;
+}
+.verified-result {
+  align-self: center;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #edf4f0;
+}
+.verified-result h3,
+.verified-method h3 {
+  margin: 0 0 .5rem;
+}
+.verified-result .verified-label {
+  margin: 0 0 .25rem;
+  color: var(--muted);
+  font-size: .9rem;
+}
+.verified-result blockquote {
+  background: #fff;
+}
+.verified-method {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+@media (max-width: 720px) {
+  .verified {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
