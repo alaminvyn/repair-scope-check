@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare an original repair quote with proposed extra work through GenLayer consensus.">
+  <title>Repair Scope Check</title>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./"><span class="mark" aria-hidden="true">R</span> Repair Scope Check</a>
+      <button id="connect" class="button secondary" type="button">Connect wallet</button>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="intro">
+      <p class="eyebrow"><span class="dot"></span> GenLayer · Bradbury Phase 2</p>
+      <h1>Is the extra work<br class="desktop-break"> in your quote?</h1>
+      <p>Compare a repair quote with a proposed change and get a verdict backed by GenLayer validators.</p>
+    </section>
+    <div class="workspace">
+      <section class="card form-card" aria-labelledby="case-title">
+        <div class="card-head">
+          <h2 id="case-title">Repair case</h2>
+          <label class="sample">Try a sample
+            <select id="example">
+              <option value="">Choose a case</option>
+              <option value="included">Work already included</option>
+              <option value="approval">Explicitly excluded work</option>
+              <option value="unclear">Ambiguous scope</option>
+            </select>
+          </label>
+        </div>
+        <form id="assessment">
+          <label for="quote">Original quote</label>
+          <textarea id="quote" rows="5" required minlength="10" maxlength="2200" placeholder="Paste the relevant scope and exclusions from the agreed quote."></textarea>
+          <label for="extra">Proposed extra work</label>
+          <textarea id="extra" rows="4" required minlength="5" maxlength="1000" placeholder="Describe the extra work the contractor is proposing."></textarea>
+          <p id="privacy" class="small">Transaction inputs are public. Remove names, addresses and other private details.</p>
+          <button id="submit" class="button primary" type="submit">Review network fee</button>
+        </form>
+        <div id="confirm" class="confirm" hidden>
+          <p id="fee-detail"></p>
+          <button id="send" class="button primary" type="button">Send for assessment</button>
+          <button id="cancel" class="button plain" type="button">Cancel</button>
+        </div>
+      </section>
+      <aside class="card result-card" aria-labelledby="result-title">
+        <h2 id="result-title">Assessment</h2>
+        <p id="status" class="status" role="status" aria-live="polite">Connect a wallet to assess a case.</p>
+        <section id="result" hidden>
+          <h3 id="verdict"></h3>
+          <blockquote id="excerpt"></blockquote>
+          <p id="explanation"></p>
+        </section>
+        <p id="error" class="error" role="alert" hidden></p>
+        <a id="tx-link" target="_blank" rel="noopener noreferrer" hidden>View transaction in Explorer</a>
+        <button id="resume" class="button secondary" type="button" hidden>Check transaction</button>
+        <div class="outcomes">
+          <h3>Possible outcomes</h3>
+          <dl>
+            <div><dt>Included</dt><dd>The quote already covers the work.</dd></div>
+            <div><dt>Approval required</dt><dd>The work falls outside the stated scope.</dd></div>
+            <div><dt>Unclear</dt><dd>The quote needs more detail.</dd></div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer><span>Based on the supplied quote and proposed work.</span><a id="contract-link" target="_blank" rel="noopener noreferrer" hidden>View Intelligent Contract</a></footer>
+  </main>
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>

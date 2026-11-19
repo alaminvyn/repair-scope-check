@@ -1,0 +1,45 @@
+name: Publish GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.25.0'
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm test
+      - run: pnpm test:contract
+      - name: Validate deployed configuration
+        run: node --input-type=module -e 'import fs from "node:fs"; const d = JSON.parse(fs.readFileSync("deployment.json")); if (d.chainId !== 4221 || !/^0x[0-9a-f]{40}$/i.test(d.contractAddress || "") || !/^0x[0-9a-f]{64}$/i.test(d.deploymentTransaction || "") || !d.verificationTransactions?.some(tx => /^0x[0-9a-f]{64}$/i.test(tx.hash || ""))) process.exit(1)'
+      - run: pnpm build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  publish:
+    needs: verify-and-build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - name: Publish site
+        id: publish
+        uses: actions/deploy-pages@v4

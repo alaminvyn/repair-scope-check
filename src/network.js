@@ -1,0 +1,104 @@
+import { createClient } from "genlayer-js";
+import { testnetBradbury } from "genlayer-js/chains";
+import { formatEther, parseEventLogs } from "viem";
+
+export const rpc = "https://rpc-bradbury.genlayer.com";
+export const walletRpc = "https://rpc.testnet-chain.genlayer.com";
+export const explorer = "https://scan.bradbury.genlayer.com";
+export const chainExplorer = "https://scan.testnet-chain.genlayer.com";
+export const genesis = "0x17d89764d4f4f963158fc4c5e8f2cb670c2837740b35f37081c12860c3df97e4";
+export const addressPattern = /^0x[a-f0-9]{40}$/i;
+export const hashPattern = /^0x[a-f0-9]{64}$/i;
+export const publicClient = createClient({ chain: testnetBradbury, endpoint: rpc });
+
+export async function connectWallet(provider) {
+  if (!provider?.request) throw new Error("Open this page in a browser with a test wallet.");
+  const accounts = await provider.request({ method: "eth_requestAccounts" });
+  if (!addressPattern.test(accounts?.[0])) throw new Error("Choose a test wallet account.");
+  return accounts[0];
+}
+
+export async function ensureNetwork(provider, account) {
+  const chainId = "0x107d";
+  if ((await provider.request({ method: "eth_chainId" })) !== chainId) {
+    try {
+      await provider.request({ method: "wallet_switchEthereumChain", params: [{ chainId }] });
+    } catch (error) {
+      if (error?.code !== 4902) throw error;
+      await provider.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+          chainId, chainName: "GenLayer Bradbury Phase 2",
+          nativeCurrency: { name: "GEN", symbol: "GEN", decimals: 18 },
+          rpcUrls: [walletRpc], blockExplorerUrls: [chainExplorer],
+        }],
+      });
+    }
+  }
+  const [id, block, accounts] = await Promise.all([
+    provider.request({ method: "eth_chainId" }),
+    provider.request({ method: "eth_getBlockByNumber", params: ["0x0", false] }),
+    provider.request({ method: "eth_accounts" }),
+  ]);
+  if (id !== chainId || block?.hash?.toLowerCase() !== genesis) {
+    throw new Error("Select Bradbury Phase 2 with the current RPC in your test wallet.");
+  }
+  if (accounts?.[0]?.toLowerCase() !== account.toLowerCase()) {
+    throw new Error("The selected wallet changed. Connect the intended test account again.");
+  }
+}
+
+export function signer(provider, account, onEnvelope) {
+  return createClient({
+    chain: testnetBradbury,
+    endpoint: rpc,
+    account,
+    provider: {
+      async request(request) {
+        const response = await provider.request(request);
+        if (request.method === "eth_sendTransaction" && hashPattern.test(response)) onEnvelope(response);
+        return response;
+      },
+    },
+  });
+}
+
+export async function estimateFees(account, mode = "assess") {
+  const units = mode === "deploy" ? 1_000_000n : 10_000_000n;
+  const [{ distribution, feeValue }, balance] = await Promise.all([
+    publicClient.estimateTransactionFees({
+      leaderTimeunitsAllocation: units, validatorTimeunitsAllocation: units,
+    }),
+    publicClient.getBalance({ address: account }),
+  ]);
+  if (feeValue >= balance) {
+    throw new Error(`The wallet has ${formatEther(balance)} test GEN. Add test GEN to cover the deposit and wallet gas.`);
+  }
+  return { distribution, feeValue };
+}
+
+export async function resolveEnvelope(hash) {
+  const raw = await publicClient.request({ method: "eth_getTransactionReceipt", params: [hash] });
+  if (!raw) return null;
+  if (raw.status === "0x0") {
+    throw Object.assign(new Error("The wallet transaction reverted on the chain."), { terminal: true });
+  }
+  return extractEnvelope(raw);
+}
+
+function extractEnvelope(receipt) {
+  const events = parseEventLogs({
+    abi: testnetBradbury.consensusMainContract.abi,
+    eventName: "NewTransaction",
+    logs: receipt.logs.filter(log => log.address.toLowerCase() === testnetBradbury.consensusMainContract.address.toLowerCase()),
+  });
+  if (!events[0]?.args?.txId) {
+    throw Object.assign(new Error("The confirmed wallet transaction has no GenLayer submission event."), { terminal: true });
+  }
+  return events[0].args.txId;
+}
+
+export function message(error) {
+  if (error?.code === 4001 || error?.cause?.code === 4001) return "Wallet request declined.";
+  return String(error?.shortMessage || error?.message || "Network request failed.").slice(0, 380);
+}
