@@ -48,16 +48,32 @@ export async function ensureNetwork(provider, account) {
   }
 }
 
+export async function walletTransactionRequest(transaction, estimateGas) {
+  const { from, to, data, value } = transaction;
+  const gas = await estimateGas({ from, to, data, value: BigInt(value) });
+  if (gas <= 0n) throw new Error("Bradbury returned an invalid gas estimate.");
+  return { from, to, data, value, gas: `0x${((gas * 12n + 9n) / 10n).toString(16)}` };
+}
+
 export function signer(provider, account, onEnvelope) {
+  let requested = false;
   return createClient({
     chain: testnetBradbury,
     endpoint: rpc,
     account,
     provider: {
       async request(request) {
-        const response = await provider.request(request);
-        if (request.method === "eth_sendTransaction" && hashPattern.test(response)) onEnvelope(response);
-        return response;
+        if (request.method !== "eth_sendTransaction") return provider.request(request);
+        if (requested) throw new Error("This action already made a wallet request. Check its status before retrying.");
+        requested = true;
+        const transaction = await walletTransactionRequest(
+          request.params[0],
+          (payload) => publicClient.estimateTransactionGas(payload),
+        );
+        const hash = await provider.request({ method: request.method, params: [transaction] });
+        if (!hashPattern.test(hash)) throw new Error("The wallet returned no valid transaction hash. Check wallet activity before retrying.");
+        onEnvelope(hash);
+        return hash;
       },
     },
   });
@@ -96,6 +112,26 @@ function extractEnvelope(receipt) {
     throw Object.assign(new Error("The confirmed wallet transaction has no GenLayer submission event."), { terminal: true });
   }
   return events[0].args.txId;
+}
+
+export function walletErrorDetails(error) {
+  const pending = [error];
+  const seen = new Set();
+  const details = [];
+  while (pending.length && seen.size < 12) {
+    const item = pending.shift();
+    if (!item || typeof item !== "object" || seen.has(item)) continue;
+    seen.add(item);
+    const code = typeof item.code === "number" ? `[${item.code}] ` : "";
+    const description = [item.shortMessage, item.message, item.details]
+      .find(text => typeof text === "string" && text.trim());
+    if (description) {
+      const line = (code + description).replace(/0x[0-9a-f]{80,}/gi, "[calldata omitted]").slice(0, 280);
+      if (!details.includes(line)) details.push(line);
+    }
+    pending.push(item.cause, item.data?.originalError, item.data, item.error);
+  }
+  return details.join("\n");
 }
 
 export function message(error) {

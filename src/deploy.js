@@ -2,10 +2,19 @@ import "./style.css";
 import { isSuccessful } from "genlayer-js";
 import { formatEther } from "viem";
 import code from "../contracts/repair_scope_check.py?raw";
-import { addressPattern, chainExplorer, connectWallet, ensureNetwork, estimateFees, explorer, message, publicClient, resolveEnvelope, signer } from "./network.js";
+import { addressPattern, chainExplorer, connectWallet, ensureNetwork, estimateFees, explorer, message, publicClient, resolveEnvelope, signer, walletErrorDetails } from "./network.js";
 
 const el = id => document.getElementById(id);
 const say = text => { el("state").textContent = text; };
+function showError(error) {
+  el("details").textContent = walletErrorDetails(error);
+  el("diagnostics").hidden = !el("details").textContent;
+  if (!el("diagnostics").hidden) el("diagnostics").open = true;
+}
+function clearError() {
+  el("diagnostics").hidden = true;
+  el("details").textContent = "";
+}
 const storageKey = "repair-scope-deployment-v1";
 let preparation;
 let sent = JSON.parse(sessionStorage.getItem(storageKey) || "null");
@@ -19,6 +28,7 @@ showLink();
 if (sent) el("prepare").disabled = true;
 
 el("prepare").onclick = async () => {
+  clearError();
   el("prepare").disabled = true;
   el("deploy").disabled = true;
   try {
@@ -33,6 +43,7 @@ el("prepare").onclick = async () => {
     el("deploy").disabled = false;
   } catch (err) {
     say(message(err));
+    showError(err);
   } finally {
     el("prepare").disabled = false;
   }
@@ -40,6 +51,7 @@ el("prepare").onclick = async () => {
 
 el("deploy").onclick = async () => {
   if (!preparation || sent) return;
+  clearError();
   const { owner, fees } = preparation;
   el("prepare").disabled = true;
   el("deploy").disabled = true;
@@ -62,6 +74,8 @@ el("deploy").onclick = async () => {
     say("Deployment submitted. Use Check deployment for the verdict.");
   } catch (err) {
     say(message(err));
+    showError(err);
+    if (!sent) say(`${message(err)} No hash was returned. Check wallet activity before another attempt.`);
     el("prepare").disabled = Boolean(sent);
   }
 };
@@ -82,6 +96,7 @@ el("check").onclick = async () => {
     } else say(receipt.statusName || "Pending");
   } catch (err) {
     say(message(err));
+    showError(err);
   } finally {
     showLink();
   }

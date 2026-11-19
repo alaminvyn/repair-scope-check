@@ -303,3 +303,9 @@ footer {
     display: grid;
   }
 }
+
+#diagnostics pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #93322a;
+}
