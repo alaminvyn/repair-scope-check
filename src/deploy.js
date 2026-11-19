@@ -15,7 +15,10 @@ function clearError() {
   el("diagnostics").hidden = true;
   el("details").textContent = "";
 }
-const storageKey = "repair-scope-deployment-v1";
+const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(code));
+const fingerprint = Array.from(new Uint8Array(bytes), byte => byte.toString(16).padStart(2, "0")).join("");
+const storageKey = `repair-scope-deployment:${fingerprint}`;
+el("version").textContent = `Contract SHA-256 ${fingerprint.slice(0, 16)}…`;
 let preparation;
 let sent = JSON.parse(sessionStorage.getItem(storageKey) || "null");
 const save = () => { sessionStorage.setItem(storageKey, JSON.stringify(sent)); };
