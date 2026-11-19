@@ -68,8 +68,11 @@ class ConsensusGating(TestCase):
             "quote_excerpt": self.scope,
             "explanation": "The quote expressly excludes the proposed pipework.",
         }
-        independent = {**leader, "verdict": independent_verdict}
-        fake_vm = SimpleNamespace(Return=Return, run_nondet_unsafe=run_nondet)
+        independent = (
+            independent_verdict if isinstance(independent_verdict, Exception)
+            else {**leader, "verdict": independent_verdict}
+        )
+        fake_vm = SimpleNamespace(Return=Return, run_nondet=run_nondet)
         fake_gl = SimpleNamespace(
             message=SimpleNamespace(sender_address=self.owner), vm=fake_vm, UserError=ValueError,
         )
@@ -92,3 +95,7 @@ class ConsensusGating(TestCase):
     def test_disagreement_rejects_the_leader_result(self):
         with self.assertRaisesRegex(ValueError, "Validator rejected"):
             self.run_case("UNCLEAR")
+
+    def test_validator_model_error_rejects_the_leader_result(self):
+        with self.assertRaisesRegex(ValueError, "Validator rejected"):
+            self.run_case(RuntimeError("temporary model failure"))

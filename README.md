@@ -12,6 +12,8 @@ The verdict is **Included**, **Approval required**, or **Unclear**. Approval req
 
 ## Release status
 
+The recorded address is the first deployment. Its live assessment hit a runner compatibility error. The corrected source awaits a new deployment and live verification. See the reviewer guide for the failure and correction.
+
 `deployment.json` is the source of truth for the contract address, deployment transaction, and verification transactions. An empty address means the frontend is in development and cannot submit a live case. Sample text is always editable. Its expected outcomes are test expectations. The app displays a verdict only when it reads a stored result from the contract.
 
 - Network: GenLayer Bradbury Phase 2, chain ID `4221`
