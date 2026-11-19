@@ -135,10 +135,10 @@ el("assessment").addEventListener("submit", async (event) => {
   const quote = el("quote").value.trim();
   const extra = el("extra").value.trim();
   if (!validateInput(quote, extra)) return error("Check the minimum and maximum lengths of both fields.");
+  if (!wallet) return error("Use Connect wallet before reviewing a network fee.");
   busy = true;
   update();
   try {
-    if (!wallet) await connect();
     const owner = wallet;
     await ensureNetwork(window.ethereum, owner);
     const fees = await estimateFees(owner);
