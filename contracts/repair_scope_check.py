@@ -1,8 +1,8 @@
-# { "Depends": "py-genlayer:9b8kjyda2ycxyq4ea6g4yfpnydxhd52gqba5rb8dw7krkh5mn9p0" }
+# { "Depends": "py-genlayer:babwp9t37jw9g4j2bccgn14g6x7x9s1f7dsmh7emvz735pz4zxa0" }
 import json
 import re
 
-from genlayer import *
+import genlayer as gl
 
 
 VERDICTS = ("INCLUDED", "APPROVAL_REQUIRED", "UNCLEAR")
@@ -39,8 +39,8 @@ def well_formed(result, scope):
     )
 
 
-class RepairScopeCheck(gl.Contract):
-    results: TreeMap[str, str]
+class RepairScopeCheck(gl.contract.Contract):
+    results: gl.storage.TreeMap[str, str]
 
     def __init__(self):
         pass

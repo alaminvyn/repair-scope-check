@@ -63,8 +63,8 @@ export function signer(provider, account, onEnvelope) {
   });
 }
 
-export async function estimateFees(account, mode = "assess") {
-  const units = mode === "deploy" ? 1_000_000n : 10_000_000n;
+export async function estimateFees(account) {
+  const units = 600n;
   const [{ distribution, feeValue }, balance] = await Promise.all([
     publicClient.estimateTransactionFees({
       leaderTimeunitsAllocation: units, validatorTimeunitsAllocation: units,

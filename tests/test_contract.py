@@ -9,8 +9,9 @@ from unittest.mock import patch
 
 identity = lambda function: function
 genlayer = SimpleNamespace(
-    gl=SimpleNamespace(Contract=object, public=SimpleNamespace(write=identity, view=identity)),
-    TreeMap=dict,
+    contract=SimpleNamespace(Contract=object),
+    public=SimpleNamespace(write=identity, view=identity),
+    storage=SimpleNamespace(TreeMap=dict),
 )
 path = Path(__file__).resolve().parents[1] / "contracts" / "repair_scope_check.py"
 spec = importlib.util.spec_from_file_location("repair_scope_check", path)

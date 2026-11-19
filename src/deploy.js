@@ -27,7 +27,7 @@ el("prepare").onclick = async () => {
     const owner = await connectWallet(window.ethereum);
     if (owner.toLowerCase() !== expected.toLowerCase()) throw new Error("Choose the approved separate test wallet.");
     await ensureNetwork(window.ethereum, owner);
-    const fees = await estimateFees(owner, "deploy");
+    const fees = await estimateFees(owner);
     preparation = { owner, fees };
     say(`Consensus deposit ${formatEther(fees.feeValue)} test GEN. Review the separate gas fee in your wallet.`);
     el("deploy").disabled = false;
