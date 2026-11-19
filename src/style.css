@@ -74,14 +74,11 @@ button:disabled {
 }
 
 .mark {
-  display: grid;
-  place-items: center;
+  display: block;
+  flex: 0 0 2rem;
   width: 2rem;
   height: 2rem;
-  border-radius: 8px;
-  background: #153e33;
-  color: white;
-  font-weight: 750;
+  object-fit: contain;
 }
 
 .intro {
