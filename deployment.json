@@ -1,10 +1,21 @@
 {
   "network": "Bradbury Phase 2",
   "chainId": 4221,
-  "contractAddress": "0x904cb85C5559A967e859E94e4fc8F93779eC6393",
-  "deploymentTransaction": "0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f",
+  "contractAddress": "0x7D24a5590b828901eFD95af1e4E6a7D483E899eA",
+  "deploymentTransaction": "0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb",
   "verificationTransactions": [],
-  "deploymentExplorerUrl": "https://scan.bradbury.genlayer.com/tx/0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f",
-  "contractExplorerUrl": "https://scan.bradbury.genlayer.com/address/0x904cb85C5559A967e859E94e4fc8F93779eC6393",
-  "deploymentStatus": "FINALIZED"
+  "deploymentExplorerUrl": "https://scan.bradbury.genlayer.com/tx/0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb",
+  "contractExplorerUrl": "https://scan.bradbury.genlayer.com/address/0x7D24a5590b828901eFD95af1e4E6a7D483E899eA",
+  "deploymentStatus": "FINALIZED",
+  "contractSha256": "be2c62fd9a92c6488fe73427a04e8406551def7a7e10c8a1ab9f0921ca59edae",
+  "previousDeployments": [
+    {
+      "contractAddress": "0x904cb85C5559A967e859E94e4fc8F93779eC6393",
+      "deploymentTransaction": "0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f",
+      "deploymentExplorerUrl": "https://scan.bradbury.genlayer.com/tx/0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f",
+      "contractExplorerUrl": "https://scan.bradbury.genlayer.com/address/0x904cb85C5559A967e859E94e4fc8F93779eC6393",
+      "status": "SUPERSEDED",
+      "failedAssessmentTransaction": "0xf043167759d507826673cf882942d9a5e5dd73c093ff8acc8dd541ffb04b6416"
+    }
+  ]
 }

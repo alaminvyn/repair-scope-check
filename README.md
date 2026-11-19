@@ -12,13 +12,13 @@ The verdict is **Included**, **Approval required**, or **Unclear**. Approval req
 
 ## Release status
 
-The recorded address is the first deployment. Its live assessment hit a runner compatibility error. The corrected source awaits a new deployment and live verification. See the reviewer guide for the failure and correction.
+The corrected contract is deployed and finalized on Bradbury Phase 2. A finalized live assessment is still pending. See the reviewer guide for the incident and the read-only verification.
 
 `deployment.json` is the source of truth for the contract address, deployment transaction, and verification transactions. An empty address means the frontend is in development and cannot submit a live case. Sample text is always editable. Its expected outcomes are test expectations. The app displays a verdict only when it reads a stored result from the contract.
 
 - Network: GenLayer Bradbury Phase 2, chain ID `4221`
-- Deployed contract: [`0x904cb85C5559A967e859E94e4fc8F93779eC6393`](https://scan.bradbury.genlayer.com/address/0x904cb85C5559A967e859E94e4fc8F93779eC6393)
-- Finalized deployment: [`0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f`](https://scan.bradbury.genlayer.com/tx/0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f)
+- Deployed contract: [`0x7D24a5590b828901eFD95af1e4E6a7D483E899eA`](https://scan.bradbury.genlayer.com/address/0x7D24a5590b828901eFD95af1e4E6a7D483E899eA)
+- Finalized deployment: [`0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb`](https://scan.bradbury.genlayer.com/tx/0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb)
 - [Bradbury Explorer](https://scan.bradbury.genlayer.com/)
 - [Test GEN faucet](https://testnet-faucet.genlayer.foundation/)
 - Project verification: [Reviewer guide](docs/reviewer-guide.md)
