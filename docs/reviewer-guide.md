@@ -2,7 +2,7 @@
 
 ## Confirm the release
 
-Open the live website URL from the submission. Confirm that the **View Intelligent Contract** link opens the Bradbury Phase 2 address given in `deployment.json`. Open one of the verification transactions recorded there to review its final status.
+Open the live website URL from the submission. Confirm that the **View Intelligent Contract** link opens the Bradbury Phase 2 address given in `deployment.json`. Open the [finalized deployment receipt](https://scan.bradbury.genlayer.com/tx/0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f) to verify the deployment. Verification transactions are listed in `deployment.json` once their results are confirmed.
 
 ## Reproduce the result
 

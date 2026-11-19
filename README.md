@@ -15,6 +15,8 @@ The verdict is **Included**, **Approval required**, or **Unclear**. Approval req
 `deployment.json` is the source of truth for the contract address, deployment transaction, and verification transactions. An empty address means the frontend is in development and cannot submit a live case. Sample text is always editable. Its expected outcomes are test expectations. The app displays a verdict only when it reads a stored result from the contract.
 
 - Network: GenLayer Bradbury Phase 2, chain ID `4221`
+- Deployed contract: [`0x904cb85C5559A967e859E94e4fc8F93779eC6393`](https://scan.bradbury.genlayer.com/address/0x904cb85C5559A967e859E94e4fc8F93779eC6393)
+- Finalized deployment: [`0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f`](https://scan.bradbury.genlayer.com/tx/0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f)
 - [Bradbury Explorer](https://scan.bradbury.genlayer.com/)
 - [Test GEN faucet](https://testnet-faucet.genlayer.foundation/)
 - Project verification: [Reviewer guide](docs/reviewer-guide.md)

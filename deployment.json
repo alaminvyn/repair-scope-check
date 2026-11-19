@@ -1,7 +1,10 @@
 {
   "network": "Bradbury Phase 2",
   "chainId": 4221,
-  "contractAddress": null,
-  "deploymentTransaction": null,
-  "verificationTransactions": []
+  "contractAddress": "0x904cb85C5559A967e859E94e4fc8F93779eC6393",
+  "deploymentTransaction": "0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f",
+  "verificationTransactions": [],
+  "deploymentExplorerUrl": "https://scan.bradbury.genlayer.com/tx/0x5e2dd9b59c1ec175e49078cb79a93550ba902022abfa3fd64fb635d2564fbe0f",
+  "contractExplorerUrl": "https://scan.bradbury.genlayer.com/address/0x904cb85C5559A967e859E94e4fc8F93779eC6393",
+  "deploymentStatus": "FINALIZED"
 }
