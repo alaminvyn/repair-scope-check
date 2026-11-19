@@ -12,7 +12,7 @@ The verdict is **Included**, **Approval required**, or **Unclear**. Approval req
 
 ## Release status
 
-The corrected contract is deployed and finalized on Bradbury Phase 2. A finalized live assessment is still pending. See the reviewer guide for the incident and the read-only verification.
+The corrected contract is deployed and finalized on Bradbury Phase 2. The explicitly excluded work case finalized with the expected on-chain verdict, **Approval required**. The reviewer guide includes the incident, simulation results, and live verification.
 
 `deployment.json` is the source of truth for the contract address, deployment transaction, and verification transactions. An empty address means the frontend is in development and cannot submit a live case. Sample text is always editable. Its expected outcomes are test expectations. The app displays a verdict only when it reads a stored result from the contract.
 
@@ -21,6 +21,7 @@ The corrected contract is deployed and finalized on Bradbury Phase 2. A finalize
 - Finalized deployment: [`0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb`](https://scan.bradbury.genlayer.com/tx/0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb)
 - [Bradbury Explorer](https://scan.bradbury.genlayer.com/)
 - [Test GEN faucet](https://testnet-faucet.genlayer.foundation/)
+- Finalized assessment: [**Approval required**](https://scan.bradbury.genlayer.com/tx/0xfde3d0349615657aaff5394acc34badbfb7a2690c135b06ec050e3426940f595)
 - Project verification: [Reviewer guide](docs/reviewer-guide.md)
 - Portal fields: [Submission checklist and copy](docs/submission.md)
 

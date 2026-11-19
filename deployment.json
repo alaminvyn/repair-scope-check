@@ -3,7 +3,27 @@
   "chainId": 4221,
   "contractAddress": "0x7D24a5590b828901eFD95af1e4E6a7D483E899eA",
   "deploymentTransaction": "0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb",
-  "verificationTransactions": [],
+  "verificationTransactions": [
+    {
+      "hash": "0xfde3d0349615657aaff5394acc34badbfb7a2690c135b06ec050e3426940f595",
+      "explorerUrl": "https://scan.bradbury.genlayer.com/tx/0xfde3d0349615657aaff5394acc34badbfb7a2690c135b06ec050e3426940f595",
+      "caseId": "e7e6a8d7318c4f488fa069eb55d4c0a9",
+      "testCase": "Explicitly excluded work",
+      "expectedVerdict": "APPROVAL_REQUIRED",
+      "recordedVerdict": "APPROVAL_REQUIRED",
+      "status": "FINALIZED",
+      "execution": "FINISHED_WITH_RETURN",
+      "consensus": "MAJORITY_AGREE",
+      "votesCommitted": 5,
+      "votesRevealed": 5,
+      "validatorExecutionVotes": {
+        "FINISHED_WITH_RETURN": 4,
+        "TIMEOUT": 1
+      },
+      "quoteExcerpt": "Pipework inside the wall is explicitly excluded.",
+      "explanation": "The quote clearly excludes pipework inside the wall. The added work involves replacing a pipe inside the wall, which falls squarely within this express exclusion. The scope is clearly bounded and does not cover this work."
+    }
+  ],
   "deploymentExplorerUrl": "https://scan.bradbury.genlayer.com/tx/0x4e6f18eb2f6e63d358a9b8cb326382fce638307fa2b08fc7b8e7fc68fbee64eb",
   "contractExplorerUrl": "https://scan.bradbury.genlayer.com/address/0x7D24a5590b828901eFD95af1e4E6a7D483E899eA",
   "deploymentStatus": "FINALIZED",

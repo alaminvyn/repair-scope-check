@@ -28,7 +28,7 @@ Optional. If recorded, link directly to the YouTube video or X post. Show the re
 
 ## 6. Review verification
 
-The excluded-pipework sample should return **Approval required**. The displayed excerpt should cite the quote's exclusion of pipework inside the wall. The Explorer should show a successful finalized transaction to the deployed Bradbury Phase 2 contract. Use the verified contract address link and sample transaction in the reviewer guide.
+The excluded-pipework sample should return **Approval required**. The displayed excerpt should cite the quote's exclusion of pipework inside the wall. The Explorer should show a successful finalized transaction to the deployed Bradbury Phase 2 contract. [Verified Bradbury assessment](https://scan.bradbury.genlayer.com/tx/0xfde3d0349615657aaff5394acc34badbfb7a2690c135b06ec050e3426940f595) · Finalized execution succeeded and the recorded verdict was Approval required.
 
 ## 7. Project links
 
